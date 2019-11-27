@@ -7,10 +7,10 @@ resources:
     properties:
       name: vmguru-sqlsrv
       region: West Europe
-      account: ddeswart-Azure
+      account: Azure
       version: '12.0'
       administrator_login: vmguru
-      resource_group_name: vmware-cloudlab
+      resource_group_name: escholten-cas
       administrator_login_password: VMware12345!
   Cloud_Service_Azure_SQL_Database_1:
     type: Cloud.Service.Azure.SQL.Database
@@ -19,9 +19,9 @@ resources:
     properties:
       name: vmguru-db1
       region: West Europe
-      account: ddeswart-Azure
+      account: Azure
       server_name: vmguru-sqlsrv
-      resource_group_name: vmware-cloudlab
+      resource_group_name: escholten-cas
   Cloud_Service_Azure_SQL_Database_2:
     type: Cloud.Service.Azure.SQL.Database
     dependsOn:
@@ -29,6 +29,6 @@ resources:
     properties:
       name: vmguru-db2
       region: West Europe
-      account: ddeswart-Azure
+      account: Azure
       server_name: vmguru-sqlsrv
-      resource_group_name: vmware-cloudlab
+      resource_group_name: escholten-cas
