@@ -1,5 +1,5 @@
 name: AWS Linux
-version: v1
+version: 1
 inputs: {}
 resources:
   Cloud_Machine_1:
@@ -9,23 +9,12 @@ resources:
         - 0
         - 0
     properties:
-      name: cas-aws
-      image: AWSlinux
+      name: aws
+      image: centos7
       flavor: small
       sshKeyName: <your AWS keypair>
-      cloudConfig: >
-        #cloudconfig
-
-        runcmd:
-
-        - sudo rpm -Uvh
-        https://yum.puppet.com/puppet6/puppet6-release-el-7.noarch.rpm
-
-        - sudo yum install -y puppet-bolt
-
-        - sudo yum install -y pdk
       constraints:
-        - tag: 'environment:dev'
+        - tag: 'env:acc'
       attachedDisks:
         - source: '${Cloud_Volume_1.id}'
       networks:
