@@ -1,5 +1,5 @@
 name: CAS demo application
-version: v2
+version: 2
 inputs: {}
 resources:
   CAS_demo:
@@ -9,9 +9,8 @@ resources:
         - 0
         - 0
     properties:
-      image: Ubuntu
+      image: ubuntu16
       flavor: small
-      folderName: <your vSphere VM folder>
       cloudConfig: |
         #cloud-config
 
@@ -44,4 +43,4 @@ resources:
       name: CAS-network
       networkType: existing
       constraints:
-        - tag: 'ipam:true'
+        - tag: 'network:public'
