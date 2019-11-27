@@ -1,2 +1,2 @@
 # Cloud Automation Services blueprints
-VMware Cloud Automation Services (CAS) blueprint examples by Erik Scholten
+VMware vRealize Automation 8 or Cloud blueprint examples by Erik Scholten
