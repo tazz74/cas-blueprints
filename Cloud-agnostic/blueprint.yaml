@@ -12,8 +12,9 @@ inputs:
   os:
     type: string
     enum:
-      - Ubuntu
-      - CentOS
+      - ubuntu16
+      - centos7
+      - windows2012
     description: OS image
     title: OS image
   count:
@@ -26,8 +27,9 @@ inputs:
   environment:
     type: string
     enum:
-      - dev
       - test
+      - dev
+      - acc
       - prod
     description: Environment
     title: Environment
