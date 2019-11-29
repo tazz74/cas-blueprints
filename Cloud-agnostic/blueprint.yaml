@@ -1,49 +1,66 @@
-name: Cloud Agnostic blueprint
-version: v2
+formatVersion: 1
+tags: 'owner:Erik'
 inputs:
   size:
     type: string
     enum:
-      - small
-      - medium
-      - large
-    description: VM size
-    title: VM Size
-  os:
+      - Small
+      - Medium
+      - Large
+    default: Small
+    description: Size of VM(s)
+    title: Select VM size
+  operating_system:
     type: string
     enum:
-      - ubuntu16
-      - centos7
-      - windows2012
-    description: OS image
-    title: OS image
+      - Centos
+      - Ubuntu
+      - Windows
+    default: Centos
+    description: Operating System
+    title: Select Operating System
   count:
     type: integer
-    default: 1
-    maximum: 4
     minimum: 1
-    description: Number of machines
-    title: Number of machines
+    maximum: 10
+    default: 1
+    description: Number of VMs
+    title: Select number of VMs (1-10)
   environment:
     type: string
     enum:
-      - test
-      - dev
-      - acc
-      - prod
-    description: Environment
-    title: Environment
+      - Test Environment
+      - Development Environment
+      - Acceptation Environment
+      - Production Environment
+    default: Acceptation Environment
+    description: Target Environment
+    title: Select Target Environment
+  networktype:
+    type: string
+    enum:
+      - 'network:public'
+      - 'network:private'
+    title: Network to connect to
+    default: 'network:private'
+    format: ''
 resources:
-  Cloud_Machine:
+  Cloud_Machine_1:
     type: Cloud.Machine
-    metadata:
-      layoutPosition:
-        - 0
-        - 0
+    count: 1
     properties:
-      name: cas
-      flavor: '${input.size}'
-      image: '${input.os}'
+      image: '${to_lower(input.operating_system)}'
+      flavor: '${to_lower(input.size)}'
       count: '${input.count}'
+      networks:
+        - name: '${Cloud_Network_1.name}'
+          network: '${resource.Cloud_Network_1.id}'
       constraints:
-        - tag: 'environment:${input.environment}'
+        - tag: '${input.environment== "Test Environment" ? "env:test" : input.environment== "Development Environment" ? "env:dev" : input.environment== "Acceptation Environment" ? "env:acc" : input.environment== "Production Environment" ? "env:prod" : "env:acc"}'
+  Cloud_Network_1:
+    type: Cloud.Network
+    properties:
+      name: '${input.networktype}'
+      networkType: existing
+      constraints:
+        - tag: '${input.networktype}'
